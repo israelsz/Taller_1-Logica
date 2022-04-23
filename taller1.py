@@ -1,3 +1,4 @@
+import pandas as pd
 from pyswip import Prolog
 
 """"
@@ -19,12 +20,13 @@ Preguntas:
 ¿Que tan bueno se considera en juegos? Excelente - regular - novato
 ¿Tiene preferencia por alguna caracteristica extra ? 
 """
-#Se fija como variable global
+# Se fija como variable global
 prolog = Prolog()
 
-#Permite cargar la base de conocimientos contenida en otro archivo.
-#Entrada: nombre del archivo.
-#Salida: True si logro hacer la operación.
+
+# Permite cargar la base de conocimientos contenida en otro archivo.
+# Entrada: nombre del archivo.
+# Salida: True si logro hacer la operación.
 def cargarBaseConocimientos(nombreArchivo):
     file = open(nombreArchivo, 'r')
     for linea in file:
@@ -33,34 +35,44 @@ def cargarBaseConocimientos(nombreArchivo):
     file.close()
     return True
 
-#Permite cargar un juego a la base de conocimientos
-#Entrada: Dos strings, una correspondiente al juego y la otra a la caracteristica de este
-#Salida:
+
+# Permite cargar un juego a la base de conocimientos
+# Entrada: Dos strings, una correspondiente al juego y la otra a la caracteristica de este
+# Salida:
 def agregarJuego(juego, caracteristica):
-    juego = "game('"+juego+"','"+caracteristica+"')"
+    juego = "game('" + juego + "','" + caracteristica + "')"
     prolog.assertz(juego)
 
-#Muestra por pantalla toda la base de conocimiento y sus hechos, requiere que exista una base de conocimientos creada
-#Entrada:
-#Salida:
+
+# Muestra por pantalla toda la base de conocimiento y sus hechos, requiere que exista una base de conocimientos creada
+# Entrada:
+# Salida:
 def mostrarBaseConocimiento():
     for soln in prolog.query("game(Juego, Caracteristica)"):
-        print("[Juego] "+soln["Juego"]+": "+soln["Caracteristica"])
+        print("[Juego] " + soln["Juego"] + ": " + soln["Caracteristica"])
 
-#Permite conseguir los juegos que cumplan con todas las caracteristicas ingresadas
-#Entrada: una lista que contiene como string caracteristicas
-#Salida: una lista con los juegos que cumplen con todas las caracteritsticas
+
+# Permite conseguir los juegos que cumplan con todas las caracteristicas ingresadas
+# Entrada: una lista que contiene como string caracteristicas
+# Salida: una lista con los juegos que cumplen con todas las caracteritsticas
 def juegosPorCaracteristicas(caracteristicas):
-    juegos = []
+    resultados_df = pd.DataFrame()
     for c in caracteristicas:
-        #Consulta
-        query = "game(Juego,'"+c+"')"
-        #Respuesta, devuelve un juego
+        juegos = []
+        # Consulta
+        query = "game(Juego,'" + c + "')"
+        # Respuesta, devuelve un juego
         response = list(prolog.query(query))
         for juego in response:
-            #Se verifica que el juego conseguido efectivamente tenga todas las caracteristicas de la lista - Pendiente
+            # Se verifica que el juego conseguido efectivamente tenga todas las caracteristicas de la lista - Pendiente
             juegos.append(juego)
-    return juegos
+        juegos_df = pd.DataFrame(juegos)
+        if resultados_df.shape[0] != 0:
+            resultados_df = pd.merge(resultados_df, juegos_df, how='inner', on='Juego')
+        else:
+            resultados_df = juegos_df
+
+    return resultados_df
 
 
 """
@@ -72,13 +84,13 @@ x = "dificultad facil"
 print(list(prolog.query("game(Juego,dificultad facil)")))
 """
 
+
 def main():
     cargarArchivo = cargarBaseConocimientos("games.txt")
-    mostrarBaseConocimiento()
-    #x = "dificultad facil"
-    #print(list(prolog.query("game(Juego,dificultad facil)")))
-    #print(list(prolog.query("game(Juego,'"+x+"')")))
-    #print(juegosPorCaracteristicas(["sandbox","nuevo"])) -> pendiente
+    # mostrarBaseConocimiento()
+    x = "dificultad facil"
+    print(juegosPorCaracteristicas(["puzzle", "nuevo","duracion larga","dificultad media"]))
+
 
 # Ejecuta el programa en la función principal
-main() 
+main()
