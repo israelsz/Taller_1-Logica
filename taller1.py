@@ -47,6 +47,21 @@ def mostrarBaseConocimiento():
     for soln in prolog.query("game(Juego, Caracteristica)"):
         print("[Juego] "+soln["Juego"]+": "+soln["Caracteristica"])
 
+#Permite conseguir los juegos que cumplan con todas las caracteristicas ingresadas
+#Entrada: una lista que contiene como string caracteristicas
+#Salida: una lista con los juegos que cumplen con todas las caracteritsticas
+def juegosPorCaracteristicas(caracteristicas):
+    juegos = []
+    for c in caracteristicas:
+        #Consulta
+        query = "game(Juego,'"+c+"')"
+        #Respuesta, devuelve un juego
+        response = list(prolog.query(query))
+        for juego in response:
+            #Se verifica que el juego conseguido efectivamente tenga todas las caracteristicas de la lista - Pendiente
+            juegos.append(juego)
+    return juegos
+
 
 """
 Ejemplos de consultas:
@@ -63,6 +78,7 @@ def main():
     #x = "dificultad facil"
     #print(list(prolog.query("game(Juego,dificultad facil)")))
     #print(list(prolog.query("game(Juego,'"+x+"')")))
+    #print(juegosPorCaracteristicas(["sandbox","nuevo"])) -> pendiente
 
 # Ejecuta el programa en la función principal
 main() 

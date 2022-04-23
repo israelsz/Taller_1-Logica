@@ -6,3 +6,43 @@ Crash Bandicoot-plataforma
 Crash Bandicoot-duracion media
 Crash Bandicoot-antiguo
 Crash Bandicoot-dificultad facil
+Cuphead-plataforma
+Cuphead-duracion media
+Cuphead-nuevo
+Cuphead-dificultad dificil
+Portal-puzzle
+Portal-duracion corta
+Portal-antiguo
+Portal-dificultad media
+Portal 2-puzzle
+Portal 2-duracion media
+Portal 2-nuevo
+Portal 2-dificultad media
+It takes two-puzzle
+It takes two-duracion larga
+It takes two-nuevo
+It takes two-dificultad media
+Minecraft-sandbox
+Minecraft-duracion media
+Minecraft-antiguo
+Minecraft-dificultad facil
+Grand Theft Auto V-sandbox
+Grand Theft Auto V-duracion alta
+Grand Theft Auto V-nuevo
+Grand Theft Auto V-dificultad facil
+Grand Theft Auto San Andreas-sandbox
+Grand Theft Auto San Andreas-duracion alta
+Grand Theft Auto San Andreas-antiguo
+Grand Theft Auto San Andreas-dificultad media
+Muck-roguelike
+Muck-duracion corta
+Muck-nuevo
+Muck-dificultad dificil
+The Binding of Isaac Repentance-roguelike
+The Binding of Isaac Repentance-duracion larga
+The Binding of Isaac Repentance-nuevo
+The Binding of Isaac Repentance-dificultad media
+Hades-roguelike
+Hades-duracion corta
+Hades-nuevo
+Hades-dificultad media
