@@ -1,0 +1,8 @@
+Donkey Kong-plataforma
+Donkey Kong-duracion media
+Donkey Kong-antiguo
+Donkey Kong-dificultad media
+Crash Bandicoot-plataforma
+Crash Bandicoot-duracion media
+Crash Bandicoot-antiguo
+Crash Bandicoot-dificultad facil
