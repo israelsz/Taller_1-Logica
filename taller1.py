@@ -1,6 +1,5 @@
 import pandas as pd
 from pyswip import Prolog
-import pandas as pd
 
 """"
 El archivo games.txt contiene la base de conocimietos a ocupar:
@@ -87,16 +86,17 @@ print(list(prolog.query("game(Juego,dificultad facil)")))
 
 
 def main():
-    cargarArchivo = cargarBaseConocimientos("games.txt")
+    prolog.consult('base.pl')
+    #cargarArchivo = cargarBaseConocimientos("games.txt")
     #mostrarBaseConocimiento()
     #x = "dificultad facil"
     #print(list(prolog.query("game(Juego,dificultad facil)")))
     #print(list(prolog.query("game(Juego,'"+x+"')")))
     #print(juegosPorCaracteristicas(["sandbox","nuevo"])) -> pendiente
-    print(juegosPorCaracteristicas(["sandbox","nuevo"]))
-    # mostrarBaseConocimiento()
-    x = "dificultad facil"
-    print(juegosPorCaracteristicas(["puzzle", "nuevo","duracion larga","dificultad media"]))
+    #print(juegosPorCaracteristicas(["sandbox","nuevo"]))
+    #print(juegosPorCaracteristicas(["antiguo","dificultad media"]))
+    consulta = list(prolog.query("game(G,X,dur_media,antiguo,J,L)"))
+    print(consulta)
 
 
 # Ejecuta el programa en la función principal
