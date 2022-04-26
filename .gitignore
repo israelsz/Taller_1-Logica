@@ -1,2 +1,3 @@
 #Ignore pycharm files
 .idea
+.pyc

@@ -10,29 +10,13 @@
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
-#from prueba import Ui_MainWindow
 
-
-class Ui_pregunta1(object):
-    """
-    def reiniciar_cuestionario(self):
-        self.windowreset = QtWidgets.QMainWindow()
-        self.ui3 = Ui_MainWindow()
-        self.ui3.setupUi(self.windowreset)
-        self.windowreset.show()
-        pregunta1.close()
-    
-    def abrir_ventana(self):
-        self.window = QtWidgets.QMainWindow()
-        self.ui2 = Ui_pregunta1()
-        self.ui2.setupUi(self.window)
-        self.window.show()
-        MainWindow.close()
-    """
-    def setupUi(self, pregunta1):
-        pregunta1.setObjectName("pregunta1")
-        pregunta1.resize(589, 330)
-        self.centralwidget = QtWidgets.QWidget(pregunta1)
+class Ui_MainWindow(object):
+    def setupUi(self, MainWindow):
+        self.MainWindow = MainWindow
+        MainWindow.setObjectName("MainWindow")
+        MainWindow.resize(589, 330)
+        self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
         self.label = QtWidgets.QLabel(self.centralwidget)
         self.label.setGeometry(QtCore.QRect(60, 20, 501, 51))
@@ -40,60 +24,58 @@ class Ui_pregunta1(object):
         font.setPointSize(16)
         self.label.setFont(font)
         self.label.setObjectName("label")
-        self.btn_siguientePregunta1 = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_siguientePregunta1.setGeometry(QtCore.QRect(240, 190, 111, 51))
-        self.btn_siguientePregunta1.setObjectName("btn_siguientePregunta1")
-        self.radioButton_2 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_2.setGeometry(QtCore.QRect(250, 110, 101, 31))
+        self.btn_siguienteMainWindow = QtWidgets.QPushButton(self.centralwidget)
+        self.btn_siguienteMainWindow.setGeometry(QtCore.QRect(240, 190, 111, 51))
+        self.btn_siguienteMainWindow.setObjectName("btn_siguienteMainWindow")
+        self.rbtn_moderado = QtWidgets.QRadioButton(self.centralwidget)
+        self.rbtn_moderado.setGeometry(QtCore.QRect(250, 110, 101, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.radioButton_2.setFont(font)
-        self.radioButton_2.setObjectName("radioButton_2")
-        self.radioButton_3 = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton_3.setGeometry(QtCore.QRect(250, 140, 101, 31))
-        self.radioButton_3.isChecked
+        self.rbtn_moderado.setFont(font)
+        self.rbtn_moderado.setObjectName("rbtn_moderado")
+        self.rbtn_poco = QtWidgets.QRadioButton(self.centralwidget)
+        self.rbtn_poco.setGeometry(QtCore.QRect(250, 140, 101, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.radioButton_3.setFont(font)
-        self.radioButton_3.setObjectName("radioButton_3")
-        self.radioButton = QtWidgets.QRadioButton(self.centralwidget)
-        self.radioButton.setGeometry(QtCore.QRect(250, 80, 101, 31))
+        self.rbtn_poco.setFont(font)
+        self.rbtn_poco.setObjectName("rbtn_poco")
+        self.rbtn_mucho = QtWidgets.QRadioButton(self.centralwidget)
+        self.rbtn_mucho.setGeometry(QtCore.QRect(250, 80, 101, 31))
         font = QtGui.QFont()
         font.setPointSize(11)
-        self.radioButton.setFont(font)
-        self.radioButton.setObjectName("radioButton")
+        self.rbtn_mucho.setFont(font)
+        self.rbtn_mucho.setObjectName("rbtn_mucho")
         self.btn_reiniciar = QtWidgets.QPushButton(self.centralwidget)
         self.btn_reiniciar.setGeometry(QtCore.QRect(20, 250, 91, 31))
         self.btn_reiniciar.setObjectName("btn_reiniciar")
-        #self.btn_reiniciar.clicked.connect(self.reiniciar_cuestionario)
-        pregunta1.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(pregunta1)
+        MainWindow.setCentralWidget(self.centralwidget)
+        self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 589, 21))
         self.menubar.setObjectName("menubar")
-        pregunta1.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(pregunta1)
+        MainWindow.setMenuBar(self.menubar)
+        self.statusbar = QtWidgets.QStatusBar(MainWindow)
         self.statusbar.setObjectName("statusbar")
-        pregunta1.setStatusBar(self.statusbar)
+        MainWindow.setStatusBar(self.statusbar)
 
-        self.retranslateUi(pregunta1)
-        QtCore.QMetaObject.connectSlotsByName(pregunta1)
+        self.retranslateUi(MainWindow)
+        QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-    def retranslateUi(self, pregunta1):
+    def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        pregunta1.setWindowTitle(_translate("pregunta1", "SpeedrunGuru - Cuestionario"))
-        self.label.setText(_translate("pregunta1", "Pregunta N°1: ¿Cuanto tiempo dispone para jugar?"))
-        self.btn_siguientePregunta1.setText(_translate("pregunta1", "Siguiente pregunta"))
-        self.radioButton_2.setText(_translate("pregunta1", "Moderado"))
-        self.radioButton_3.setText(_translate("pregunta1", "Poco"))
-        self.radioButton.setText(_translate("pregunta1", "Mucho"))
-        self.btn_reiniciar.setText(_translate("pregunta1", "Reiniciar"))
+        MainWindow.setWindowTitle(_translate("MainWindow", "SpeedrunGuru - Cuestionario"))
+        self.label.setText(_translate("MainWindow", "Pregunta N°1: ¿Cuanto tiempo dispone para jugar?"))
+        self.btn_siguienteMainWindow.setText(_translate("MainWindow", "Siguiente pregunta"))
+        self.rbtn_moderado.setText(_translate("MainWindow", "Moderado"))
+        self.rbtn_poco.setText(_translate("MainWindow", "Poco"))
+        self.rbtn_mucho.setText(_translate("MainWindow", "Mucho"))
+        self.btn_reiniciar.setText(_translate("MainWindow", "Reiniciar"))
 
 
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
-    pregunta1 = QtWidgets.QMainWindow()
-    ui = Ui_pregunta1()
-    ui.setupUi(pregunta1)
-    pregunta1.show()
+    MainWindow = QtWidgets.QMainWindow()
+    ui = Ui_MainWindow()
+    ui.setupUi(MainWindow)
+    MainWindow.show()
     sys.exit(app.exec_())
