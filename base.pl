@@ -9,5 +9,10 @@ game('Minecraft',sandbox,dur_media,antiguo,dif_facil,mundo_abierto).
 game('Grand Theft Auto V',sandbox,dur_larga,nuevo,dif_facil,mundo_abierto).
 game('Grand Theft Auto San Andreas',sandbox,dur_larga,antiguo,dif_media,mundo_abierto).
 game('Muck',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
+game('Muck1',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
+game('Muck2',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
+game('Muck3',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
+game('Muck4',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
+game('Muck5',roguelike,dur_corta,nuevo,dif_dificil,sin_historia).
 game('The Binding of Isaac Repentance',roguelike,dur_larga,nuevo,dif_media,sin_historia).
 game('Hades',roguelike,dur_corta,nuevo,dif_media,sin_historia).
