@@ -7,6 +7,7 @@ from collections import Counter
 prolog = Prolog()
 
 
+
 # Ventana principal
 class Ui_MainWindow3(object):
     def setupUi(self, MainWindow):
@@ -168,14 +169,26 @@ class Ui_MainWindow3(object):
 "text-decoration: underline;")
         self.label_9.setAlignment(QtCore.Qt.AlignCenter)
         self.label_9.setObjectName("label_9")
-        self.label_10 = QtWidgets.QLabel(self.centralwidget)
-        self.label_10.setGeometry(QtCore.QRect(680, 260, 371, 431))
+        self.scrollArea = QtWidgets.QScrollArea(self.centralwidget)
+        self.scrollArea.setGeometry(QtCore.QRect(680, 260, 371, 431))
+        self.scrollArea.setStyleSheet("background-color: rgb(223, 223, 223);")
+        self.scrollArea.setWidgetResizable(True)
+        self.scrollArea.setObjectName("scrollArea")
+        self.scrollAreaWidgetContents = QtWidgets.QWidget(self.scrollArea)
+        self.scrollAreaWidgetContents.setGeometry(QtCore.QRect(0, 0, 389, 459))
+        self.scrollAreaWidgetContents.setObjectName("scrollAreaWidgetContents")
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
+        self.lay = QtWidgets.QVBoxLayout(self.scrollAreaWidgetContents)
+        self.label_10 = QtWidgets.QLabel(self.scrollAreaWidgetContents)
         self.label_10.setStyleSheet("background-color: rgb(223, 223, 223);\n"
 "border-color: rgb(0, 0, 0);\n"
 "font: 87 12pt \"Arial\";")
         self.label_10.setTextFormat(QtCore.Qt.AutoText)
         self.label_10.setAlignment(QtCore.Qt.AlignLeading|QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
+        self.label_10.setWordWrap(True)
         self.label_10.setObjectName("label_10")
+        self.lay.addWidget(self.label_10)
+        self.scrollArea.setWidget(self.scrollAreaWidgetContents)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1090, 21))
@@ -193,6 +206,7 @@ class Ui_MainWindow3(object):
         self.label_8.setHidden(True)
         self.label_9.setHidden(True)
         self.label_10.setHidden(True)
+
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
@@ -280,6 +294,7 @@ class Ui_MainWindow3(object):
             cadena = ""
             for i in consulta:
                 cadena = cadena + "• " + i['Juego'] + " | " + i['Categoria'].capitalize() + "\n"
+            
             self.label_10.setText(cadena)
             # Se muestra por pantalla las etiquetas con los resultados
             self.label_7.setHidden(False)
