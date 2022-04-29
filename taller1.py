@@ -265,35 +265,48 @@ class Ui_MainWindow3(object):
             parametro4 = "_"
         # Se efectua la consulta en prolog pasando los parametros seleccionados
         consulta = list(prolog.query("game(Juego,Categoria," + parametro1 + "," + parametro2 + "," + parametro3 + "," + parametro4 +")"))
-
+        flag = 0
         #En caso que la consulta arroje resultados:
-        if(consulta != []):
-            #Se busca la categoria más probable de todos los juegos filtrados
-            # Se añaden todas las categorias de los juegos encontradas a una lista
-            categoriasEncontradas = []
-            for j in consulta:
-                categoriasEncontradas.append(j['Categoria'])
-            # Luego se busca la categoria más repetida
-            categoria = Counter(categoriasEncontradas).most_common(1)
-            categoria = categoria[0][0]
-            self.label_8.setText(categoria.capitalize())
-            cadena = ""
-            for i in consulta:
-                cadena = cadena + "• " + i['Juego'] + " | " + i['Categoria'].capitalize() + "\n"
-            self.label_10.setText(cadena)
-            # Se muestra por pantalla las etiquetas con los resultados
-            self.label_7.setHidden(False)
-            self.label_8.setHidden(False)
-            self.label_9.setHidden(False)
-            self.label_10.setHidden(False)
-        #En caso que la consulta no arroje ningun resultado
+        if(consulta == []):
+            flag = 1
+            consulta = list(prolog.query("game(Juego,Categoria," + "_" + "," + parametro2 + "," + parametro3 + "," + parametro4 +")"))
+            if(consulta == []):
+                flag = 1
+                consulta = list(prolog.query("game(Juego,Categoria," + parametro1 + "," + "_" + "," + parametro3 + "," + parametro4 +")"))
+                if(consulta == []):
+                    flag = 1
+                    consulta = list(prolog.query("game(Juego,Categoria," + parametro1 + "," + parametro2 + "," + "_" + "," + parametro4 +")"))
+                    if(consulta == []):
+                        flag = 1
+                        consulta = list(prolog.query("game(Juego,Categoria," + parametro1 + "," + parametro2 + "," + parametro3 + "," + "_" +")"))
+
+
+        
+        #Se busca la categoria más probable de todos los juegos filtrados
+        # Se añaden todas las categorias de los juegos encontradas a una lista
+        
+        categoriasEncontradas = []
+        for j in consulta:
+            categoriasEncontradas.append(j['Categoria'])
+        # Luego se busca la categoria más repetida
+        categoria = Counter(categoriasEncontradas).most_common(1)
+        categoria = categoria[0][0] 
+        self.label_8.setText(categoria.capitalize())
+        if flag == 1:
+            self.label_7.setText("No encontramos juegos para tu selección,\n pero la categoría que se acerca a sus preferencias es:")
         else:
-            self.label_8.setText("Categoria no determinada")
-            self.label_10.setText("Lo sentimos, no hemos encontrado ningun juego")
-            self.label_7.setHidden(False)
-            self.label_8.setHidden(False)
-            self.label_9.setHidden(False)
-            self.label_10.setHidden(False)
+            self.label_7.setText("La categoría recomendada según su selección es:")
+
+        cadena = ""
+        for i in consulta:
+            cadena = cadena + "• " + i['Juego'] + " | " + i['Categoria'].capitalize() + "\n"
+        self.label_10.setText(cadena)
+        # Se muestra por pantalla las etiquetas con los resultados
+        self.label_7.setHidden(False)
+        self.label_8.setHidden(False)
+        self.label_9.setHidden(False)
+        self.label_10.setHidden(False)
+        
 
 
 if __name__ == "__main__":
