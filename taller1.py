@@ -210,7 +210,7 @@ class Ui_MainWindow3(object):
 
     def retranslateUi(self, MainWindow):
         _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
+        MainWindow.setWindowTitle(_translate("SpeedrunGuru", "SpeedrunGuru"))
         self.label.setText(_translate("MainWindow", "1. ¿Cuánto tiempo dispone para jugar?"))
         self.label_2.setText(_translate("MainWindow", "Responda las siguientes preguntas para conseguir un resultado:"))
         self.cb_pregunta1.setItemText(0, _translate("MainWindow", "Mucho tiempo"))
