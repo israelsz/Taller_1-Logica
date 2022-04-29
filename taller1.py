@@ -213,7 +213,7 @@ class Ui_MainWindow3(object):
         self.cb_pregunta4.setItemText(0, _translate("MainWindow", "Etapas distintas"))
         self.cb_pregunta4.setItemText(1, _translate("MainWindow", "Que requiera resolver problemas"))
         self.cb_pregunta4.setItemText(2, _translate("MainWindow", "Que se pueda explorar"))
-        self.cb_pregunta4.setItemText(3, _translate("MainWindow", "Que no tenga historia"))
+        self.cb_pregunta4.setItemText(3, _translate("MainWindow", "Que pueda ir desbloqueando zonas"))
         self.cb_pregunta4.setItemText(4, _translate("MainWindow", "No tengo alguna preferencia en especial"))
         self.btn_enviar.setText(_translate("MainWindow", "Recomendar juegos"))
         self.label_6.setText(_translate("MainWindow", "Juegos recomendados:"))
@@ -259,8 +259,8 @@ class Ui_MainWindow3(object):
             parametro4 = "pensar"
         elif (respuesta4 == "Que se pueda explorar"):
             parametro4 = "mundo_abierto"
-        elif(respuesta4 == "Que no tenga historia"):
-            parametro4 = "sin_historia"
+        elif(respuesta4 == "Que pueda ir desbloqueando zonas"):
+            parametro4 = "desbloquear_zonas"
         else:
             parametro4 = "_"
         # Se efectua la consulta en prolog pasando los parametros seleccionados
