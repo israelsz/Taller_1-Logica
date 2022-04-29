@@ -1,8 +1,9 @@
 import sys
 from PyQt5 import QtCore, QtGui, QtWidgets
 from pyswip import Prolog
+from collections import Counter
 
-# Se fija como variable global
+# Se fija a prolog como variable global
 prolog = Prolog()
 
 
@@ -121,12 +122,7 @@ class Ui_MainWindow3(object):
         self.cb_pregunta4.addItem("")
         self.cb_pregunta4.addItem("")
         self.cb_pregunta4.addItem("")
-        self.btn_atras = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_atras.setGeometry(QtCore.QRect(10, 700, 81, 41))
-        self.btn_atras.setStyleSheet("background-color: rgb(83, 109, 254);\n"
-"color: rgb(255, 255, 255);\n"
-"font: 75 14pt \"MS Shell Dlg 2\";")
-        self.btn_atras.setObjectName("btn_atras")
+        self.cb_pregunta4.addItem("")
         self.btn_enviar = QtWidgets.QPushButton(self.centralwidget)
         self.btn_enviar.setGeometry(QtCore.QRect(170, 620, 231, 71))
         self.btn_enviar.setStyleSheet("background-color: rgb(83, 109, 254);\n"
@@ -192,7 +188,6 @@ class Ui_MainWindow3(object):
         self.retranslateUi(MainWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
-        self.btn_atras.clicked.connect(self.cambiarVentana)
         self.btn_enviar.clicked.connect(self.ejecutarConsulta)
         self.label_7.setHidden(True)
         self.label_8.setHidden(True)
@@ -219,7 +214,7 @@ class Ui_MainWindow3(object):
         self.cb_pregunta4.setItemText(1, _translate("MainWindow", "Que requiera resolver problemas"))
         self.cb_pregunta4.setItemText(2, _translate("MainWindow", "Que se pueda explorar"))
         self.cb_pregunta4.setItemText(3, _translate("MainWindow", "Que no tenga historia"))
-        self.btn_atras.setText(_translate("MainWindow", "Atras"))
+        self.cb_pregunta4.setItemText(4, _translate("MainWindow", "No tengo alguna preferencia en especial"))
         self.btn_enviar.setText(_translate("MainWindow", "Recomendar juegos"))
         self.label_6.setText(_translate("MainWindow", "Juegos recomendados:"))
         self.label_7.setText(_translate("MainWindow", "La categoría recomendada según su selección es:"))
@@ -227,14 +222,7 @@ class Ui_MainWindow3(object):
         self.label_9.setText(_translate("MainWindow", "Juegos recomendados:"))
         self.label_10.setText(_translate("MainWindow", "- Juego"))
 
-    
-    def cambiarVentana(self):
-        #Cambiar de ventana
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow()
-        self.ui.setupUi(self.window)
-        self.MainWindow.hide()
-        self.window.show()
+
 
     def ejecutarConsulta(self):
         respuesta1 = str(self.cb_pregunta1.currentText())
@@ -263,7 +251,7 @@ class Ui_MainWindow3(object):
         else:
             parametro3 = "dif_facil"
 
-        # Se fija el parametro para la consulta de la pregunta 3:
+        # Se fija el parametro para la consulta de la pregunta 4:
 
         if(respuesta4 == "Etapas distintas"):
             parametro4 = "etapas_distintas"
@@ -271,18 +259,27 @@ class Ui_MainWindow3(object):
             parametro4 = "pensar"
         elif (respuesta4 == "Que se pueda explorar"):
             parametro4 = "mundo_abierto"
-        else:
+        elif(respuesta4 == "Que no tenga historia"):
             parametro4 = "sin_historia"
+        else:
+            parametro4 = "_"
         # Se efectua la consulta en prolog pasando los parametros seleccionados
         consulta = list(prolog.query("game(Juego,Categoria," + parametro1 + "," + parametro2 + "," + parametro3 + "," + parametro4 +")"))
-        print(consulta)
 
         #En caso que la consulta arroje resultados:
         if(consulta != []):
-            self.label_8.setText(consulta[0]['Categoria'])
+            #Se busca la categoria más probable de todos los juegos filtrados
+            # Se añaden todas las categorias de los juegos encontradas a una lista
+            categoriasEncontradas = []
+            for j in consulta:
+                categoriasEncontradas.append(j['Categoria'])
+            # Luego se busca la categoria más repetida
+            categoria = Counter(categoriasEncontradas).most_common(1)
+            categoria = categoria[0][0]
+            self.label_8.setText(categoria.capitalize())
             cadena = ""
             for i in consulta:
-                cadena = cadena + "- " + i['Juego'] + "\n"
+                cadena = cadena + "• " + i['Juego'] + " | " + i['Categoria'].capitalize() + "\n"
             self.label_10.setText(cadena)
             # Se muestra por pantalla las etiquetas con los resultados
             self.label_7.setHidden(False)
@@ -298,47 +295,6 @@ class Ui_MainWindow3(object):
             self.label_9.setHidden(False)
             self.label_10.setHidden(False)
 
-# Ventana inicial
-class Ui_MainWindow(object):
-    def setupUi(self, MainWindow):
-        self.MainWindow = MainWindow
-        MainWindow.setObjectName("MainWindow")
-        MainWindow.resize(800, 600)
-        self.centralwidget = QtWidgets.QWidget(MainWindow)
-        self.centralwidget.setObjectName("centralwidget")
-        self.btn_inicial = QtWidgets.QPushButton(self.centralwidget)
-        self.btn_inicial.setGeometry(QtCore.QRect(310, 350, 141, 51))
-        self.btn_inicial.setObjectName("btn_inicial")
-        self.label_titulo = QtWidgets.QLabel(self.centralwidget)
-        self.label_titulo.setGeometry(QtCore.QRect(270, 120, 211, 41))
-        self.label_titulo.setObjectName("label_titulo")
-        MainWindow.setCentralWidget(self.centralwidget)
-        self.menubar = QtWidgets.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 21))
-        self.menubar.setObjectName("menubar")
-        MainWindow.setMenuBar(self.menubar)
-        self.statusbar = QtWidgets.QStatusBar(MainWindow)
-        self.statusbar.setObjectName("statusbar")
-        MainWindow.setStatusBar(self.statusbar)
-
-        self.retranslateUi(MainWindow)
-        QtCore.QMetaObject.connectSlotsByName(MainWindow)
-        self.btn_inicial.clicked.connect(self.cambiarVentana)
-
-    def retranslateUi(self, MainWindow):
-        _translate = QtCore.QCoreApplication.translate
-        MainWindow.setWindowTitle(_translate("MainWindow", "MainWindow"))
-        self.btn_inicial.setText(_translate("MainWindow", "Iniciar"))
-        self.label_titulo.setText(_translate("MainWindow", "Recomendador de juegos para Speedrun"))
-    
-    def cambiarVentana(self):
-        #Logica antes de cambiar de ventana
-        #Cambiar de ventana
-        self.window = QtWidgets.QMainWindow()
-        self.ui = Ui_MainWindow3()
-        self.ui.setupUi(self.window)
-        self.MainWindow.hide()
-        self.window.show()
 
 if __name__ == "__main__":
     # Se carga la base de conocimientos
@@ -346,7 +302,7 @@ if __name__ == "__main__":
     # Se inicializa el front
     app = QtWidgets.QApplication(sys.argv)
     MainWindow = QtWidgets.QMainWindow()
-    ui = Ui_MainWindow()
+    ui = Ui_MainWindow3()
     ui.setupUi(MainWindow)
     MainWindow.show()
     sys.exit(app.exec_())
